@@ -7,8 +7,13 @@
 	<source path="src" />
 	
 	<haxelib name="openfl" />
+	<haxelib name="tilelayer" />
+	<haxelib name="actuate" />
+	<haxelib name="gameconsole" />
 	
 	<assets path="assets" rename="assets" exclude="openfl.svg" />
 	<icon path="assets/openfl.svg" />
+	
+	<window orientation="landscape" width="1024" height="768" fps="60" />
 	
 </project>
