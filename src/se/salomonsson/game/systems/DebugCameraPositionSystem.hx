@@ -32,6 +32,7 @@ class DebugCameraPositionSystem extends Sys
 		_camera = em.getComp(CameraComponent);
 		
 		_tf = new TextField();
+		_tf.selectable = false;
 		_tf.x = 250;
 		_tf.autoSize = TextFieldAutoSize.LEFT;
 		_tf.background = true;

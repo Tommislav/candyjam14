@@ -45,6 +45,8 @@ class Core {
 	* Default priority?
 	**/
 
+	// Higher number = higher priority (will be run before lower numbers)
+	// Equal prio will be run in same order as they were added.
 	public function addSystem(sys:Sys, prio:Int) {
 		_sm.addSystem(sys, prio);
 		return sys;
