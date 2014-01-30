@@ -39,7 +39,7 @@ class Main extends Sprite {
 		var sheet:Tilesheet = new Tilesheet(Assets.getBitmapData("assets/ship.png", true));
 		sheet.addTileRect(new Rectangle(0, 0, 64, 64), new Point(32, 32));
 		
-		sheet.drawTiles(g, [100, 100, 0], true);
+		sheet.drawTiles(g, [320, 300, 0], true);
 		
 		
 		SLogger.setShortcutKeyCode(Keyboard.F1);
