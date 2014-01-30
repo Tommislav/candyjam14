@@ -50,9 +50,9 @@ class GameScreen
 			.addComponent(new CanvasComponent(getGraphicCanvas(), WIDTH, HEIGHT, "main", 1.0))
 			.addComponent(new CameraComponent("mainCamera", 0, 0, WIDTH, HEIGHT))
 			.addComponent(new TilesheetComponent().setSingleSheet(getTilesheet()))
-			.addComponent(new TileLayerComponent("bg_back", 0, TileGrid.getRandomized(40, 20, 0, 8), 0, 0.3, 0.3))
-			.addComponent(new TileLayerComponent("bg_mid", 0, TileGrid.getRandomized(40, 20, 12, 20), 0, 0.5, 0.5))
-			.addComponent(new TileLayerComponent("bg_front", 0, TileGrid.getRandomized(40, 20, 24, 32), 0, 1, 1));
+			.addComponent(new TileLayerComponent("bg_back", 0, TileGrid.getRandomized(20, 20, 0, 8), 0, 0.3, 0.3))
+			.addComponent(new TileLayerComponent("bg_mid", 0, TileGrid.getRandomized(30, 20, 12, 20), 0, 0.5, 0.5))
+			.addComponent(new TileLayerComponent("bg_front", 0, TileGrid.getRandomized(30, 20, 24, 32), 0, 1, 1));
 		
 		
 		_core.addSystem(new SineMoveCameraSystem("mainCamera", 0, 2560-1024, 0, 1280-768), 9);
@@ -82,8 +82,6 @@ class GameScreen
 	
 	private function getGraphicCanvas():Graphics {
 		_canvas = new Sprite();
-		_canvas.width = WIDTH;
-		_canvas.height = HEIGHT;
 		
 		_holder.addChild(_canvas);
 		return _canvas.graphics;
