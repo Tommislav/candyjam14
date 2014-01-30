@@ -37,6 +37,12 @@ class SLogger
 		#end
 	}
 	
+	public static function setShortcutKeyCode(key:Int) {
+		#if debug
+			GameConsole.setShortcutKeyCode(key);
+		#end
+	}
+	
 	public function new() 
 	{
 		

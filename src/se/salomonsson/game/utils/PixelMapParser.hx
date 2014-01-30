@@ -1,12 +1,13 @@
 package se.salomonsson.game.utils;
 import flash.display.BitmapData;
+import se.salomonsson.game.components.ITileGrid;
 
 /**
  * saves a 2d bitmap and uses the color values as data
  * @author Tommislav
  */
 
-class PixelMapParser 
+class PixelMapParser implements ITileGrid
 {
 
 	public var width (get, null):Int;
@@ -21,7 +22,7 @@ class PixelMapParser
 	
 	private var _hexArr:Array<String>;
 	
-	public function new(bd:BitmapData) {
+	public function new(bd:BitmapData) {	
 		setMap(bd);
 		_hexArr = new Array<String>();
 		_hexArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];

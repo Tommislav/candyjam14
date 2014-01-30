@@ -4,9 +4,13 @@ import flash.display.DisplayObjectContainer;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import se.salomonsson.candyjam.components.DrawableComponent;
+import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.CanvasComponent;
+import se.salomonsson.game.components.TileLayerComponent;
+import se.salomonsson.game.components.TilesheetComponent;
 import se.salomonsson.seagal.core.GameTime;
 import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.debug.SLogger;
 
 /**
  * ...
@@ -22,12 +26,53 @@ class RenderSystem extends Sys
 	override public function tick(gt:GameTime):Void 
 	{
 		var holder:CanvasComponent = em().getComp(CanvasComponent);
-		holder.canvas.fillRect(new Rectangle(0, 0, holder.width, holder.heigth), 0xffffff);
+		var tilesheet:TilesheetComponent = em().getComp(TilesheetComponent);
+		var camera:CameraComponent = em().getComp(CameraComponent);
+		var layers:Array<TileLayerComponent> = em().getComponents(TileLayerComponent);
 		
-		var drawables:Array<DrawableComponent> = em().getComponents(DrawableComponent);
-		for (i in 0...drawables.length) {
-			holder.canvas.copyPixels(drawables[i].drawable, new Rectangle(0, 0, 64, 64), new Point(drawables[i].x, drawables[i].y));
+		var renderData:Array<Float> = new Array<Float>();
+		
+		for (layer in layers) {
+			recalcLayerData(renderData, layer, camera);
 		}
+		
+		
+		
+		holder.canvas.clear();
+		tilesheet.tileSheets[0].drawTiles(holder.canvas, renderData);
+		
 	}
 	
+	function recalcLayerData(renderData:Array<Float>, layers:TileLayerComponent, camera:CameraComponent) 
+	{
+		var tileW = 64;
+		var tileH = 64;
+		
+		var camX = camera.x * layers.scrollX;
+		var camY = camera.y * layers.scrollY;
+		var startX = Math.floor(camX / tileW);
+		var startY = Math.floor(camY / tileH);
+		var camOffX = camX - (startX * tileW);
+		var camOffY = camY - (startY * tileH);
+		
+		var endX = startX + (Math.floor(camera.width / tileW) + 1);
+		var endY = startY + (Math.floor(camera.height / tileH) + 1);
+		
+		for (y in startY...endY) {
+			for (x in startX...endX) {
+				
+				var tileId = layers.grid.atCoord(x, y);
+				if (tileId >= 0) {
+					var tX:Float = (x*tileW) - camX;
+					var tY:Float = (y*tileH) - camY;
+					var tW = tX + 64;
+					var tH = tY + 64;
+					
+					renderData.push(tX);
+					renderData.push(tY);
+					renderData.push(tileId);
+				}
+			}
+		}
+	}
 }

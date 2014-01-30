@@ -15,38 +15,12 @@ class CameraComponent implements IComponent
 	public var height:Float;
 	public var name:String;
 	
-	public function new(name:String) 
+	public function new(name:String, x:Float=0, y:Float=0, width:Float=800, height:Float=480) 
 	{
 		this.name = name;
-		
-		x = 0;
-		y = 0;
-		width = 800;
-		height = 480;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
-	
-	public static function build(name:String, x:Float, y:Float, width:Float, height:Float):CameraComponent {
-		var c:CameraComponent = new CameraComponent(name);
-		c.x = x;
-		c.y = y;
-		c.width = width;
-		c.height = height;
-		return c;
-	}
-	
-	// You shouldn't place logic in component... =/
-	/*
-	public function inView(pos:CenterPointPositionComponent):Bool {
-		var posLeft = pos.x - pos.radius;
-		var posRight = pos.x + pos.radius;
-		var posTop = pos.y - pos.radius;
-		var posBottom = pos.y + pos.radius;
-		
-		if (posRight > x && posLeft < (x + width)) {
-			if (posBottom > y && posTop < (y + height)) {
-				return true;
-			}
-		}
-		return false;
-	}*/
 }
