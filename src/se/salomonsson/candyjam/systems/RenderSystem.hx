@@ -26,7 +26,7 @@ class RenderSystem extends Sys
 	override public function tick(gt:GameTime):Void 
 	{
 		var holder:CanvasComponent = em().getComp(CanvasComponent);
-		var tilesheet:TilesheetComponent = em().getComp(TilesheetComponent);
+		var sheets:TilesheetComponent = em().getComp(TilesheetComponent);
 		var camera:CameraComponent = em().getComp(CameraComponent);
 		var layers:Array<TileLayerComponent> = em().getComponents(TileLayerComponent);
 		
@@ -38,8 +38,10 @@ class RenderSystem extends Sys
 		
 		
 		
+		
+		var smooth:Bool = false;
 		holder.canvas.clear();
-		tilesheet.tileSheets[0].drawTiles(holder.canvas, renderData);
+		sheets.tileSheets[0].drawTiles(holder.canvas, renderData, smooth);
 		
 	}
 	

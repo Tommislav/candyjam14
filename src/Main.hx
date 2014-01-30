@@ -6,6 +6,7 @@ import flash.display.Sprite;
 import flash.events.Event;
 import flash.geom.Point;
 import flash.geom.Rectangle;
+import flash.Lib;
 import flash.text.TextField;
 import flash.ui.Keyboard;
 import openfl.Assets;
@@ -27,6 +28,8 @@ class Main extends Sprite {
 		
 		super ();
 		
+		//Lib.current.scaleX = Lib.current.scaleY = 2;
+		//Lib.current.y = 10;
 		
 		_currentScreen = new GameScreen(this);
 		_currentScreen.enter();
